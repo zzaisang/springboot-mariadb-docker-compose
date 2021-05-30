@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+        format_sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  output:
+    ansi:
+      enabled: always
