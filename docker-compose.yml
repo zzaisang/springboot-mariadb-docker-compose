@@ -1,38 +1,49 @@
 version: '3.7'
 
 services:
-  database:
-    container_name: database
+
+  db:
+#    container_name: database
     image: mariadb:10.2.12
-    volumes:
-      - ./db/data:/var/lib/mysql
+    restart: always
     ports:
       - 3306:3306
     environment:
       TZ : Asia/Seoul
-      MYSQL_DATEBASE : zzaisang_local
-      MYSQL_USER : zzaisang
-      MYSQL_PASSWORD : zaq1234!
-    networks:
-      - backend-network
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+#    networks:
+#      - backend-network
 
-  application:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    volumes:
+      #- ./db/data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
     restart: always
     ports:
-    - 8088:8088
-    depends_on:
-      - database
-    environment:
-      TZ : Asia/Seoul
-      SPRING_PROFILES_ACTIVE : local
-      SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/zzaisang_local?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false
-      SPRING_DATASOURCE_USERNAME: zzaisang
-      SPRING_DATASOURCE_PASSWORD: zaq1234!
-    networks:
-      - backend-network
+      - 8080:8080
 
-networks:
-  backend-network:
+#  application:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    restart: always
+#    ports:
+#    - 8088:8088
+#    depends_on:
+#      - database
+#    environment:
+#      TZ : Asia/Seoul
+#      SPRING_PROFILES_ACTIVE : local
+#      SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/zzaisang_local?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false
+#      SPRING_DATASOURCE_USERNAME: local
+#      SPRING_DATASOURCE_PASSWORD: zaq1234!
+#    networks:
+#      - backend-network
+
+#networks:
+#  backend-network:

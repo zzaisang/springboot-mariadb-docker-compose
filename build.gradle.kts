@@ -19,7 +19,6 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
     //implementation("org.springframework.boot:spring-boot-starter-security")
     annotationProcessor ("org.springframework.boot:spring-boot-configuration-processor")
@@ -32,7 +31,4 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testCompile("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
 }
